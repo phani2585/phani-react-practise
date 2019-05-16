@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //import ReactDOM from 'react-dom';
 import './Login.css';
 import Home from '../../screens/home/Home';
-//import Profile from '../../screens/profile/Profile';
+import Profile from '../../screens/profile/Profile';
 import Header from '../../common/header/Header';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -30,41 +30,17 @@ class Login extends Component {
         }
     }
 
-    
+
 
     loginClickHandler = () => {
-        
-       
-            this.state.username === "" ? this.setState({ usernameRequired: "dispBlock" }) : this.setState({ usernameRequired: "dispNone" });
-            this.state.password === "" ? this.setState({ passwordRequired: "dispBlock" }) : this.setState({ passwordRequired: "dispNone" });
-    
-            let dataLogin = null;
-            let xhrLogin = new XMLHttpRequest();
-            let that = this;
-            xhrLogin.addEventListener("readystatechange", function () {
-                if (this.readyState === 4) {
-                    sessionStorage.setItem("uuid", JSON.parse(this.responseText).id);
-                    sessionStorage.setItem("access-token", xhrLogin.getResponseHeader("access-token"));
-    
-                    that.setState({
-                        loggedIn: true
-                    });
-    
-                    that.loginStateHandler();
-                }
-            });
-    
-            xhrLogin.open("POST", this.props.baseUrl + "auth/login");
-            xhrLogin.setRequestHeader("Authorization", "Basic " + window.btoa(this.state.username + ":" + this.state.password));
-            xhrLogin.setRequestHeader("Content-Type", "application/json");
-            xhrLogin.setRequestHeader("Cache-Control", "no-cache");
-            xhrLogin.send(dataLogin);
-        }
-        }
 
-        loginStateHandler =(e) => {
-            
-        }
+
+        this.state.username === "" ? this.setState({ usernameRequired: "dispBlock" }) : this.setState({ usernameRequired: "dispNone" });
+        this.state.password === "" ? this.setState({ passwordRequired: "dispBlock" }) : this.setState({ passwordRequired: "dispNone" });
+
+
+    }
+
     inputUsernameChangeHandler = (e) => {
         this.setState({ username: e.target.value })
     }
@@ -73,9 +49,16 @@ class Login extends Component {
     }
     render() {
         return (
-            
+
 
             <div>
+                <Router>
+                    <div className="main-container">
+                    
+                        <Route path='/home' render={(props) => <Home {...props} />} />
+                        <Route path='/profile' render={(props) => <Profile {...props} />} />
+                    </div>
+                </Router>
                 <Header />
                 <div className="cardStyle">
 
