@@ -1,6 +1,14 @@
 .cardStyle {
     display: flex;
-    align-items: center;
     justify-content: center;
     margin-top: 2%;
+}
+.dispNone {
+    display: none;
+}
+.dispBlock {
+    display: block;
+}
+.red{
+    color: red;
 }
